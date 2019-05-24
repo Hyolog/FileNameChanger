@@ -3,10 +3,63 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FileNameChanger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="FileNameChanger" 
+        MinWidth="400"
+        SizeToContent="WidthAndHeight">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" 
+              Padding="5">
+            <MenuItem Header="Mode">
+                <MenuItem Header="CutBefore"/>
+                <MenuItem Header="CutAfter"/>
+                <Separator/>
+            </MenuItem>
+            <MenuItem Header="Help" />
+        </Menu>
+
+        <TextBlock Grid.Row="1" 
+                   Text="Directory Path"
+                   Margin="5, 10, 5, 0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"/>
         
+        <Grid Grid.Row="2"
+              Margin="15, 5, 15, 5"
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0"
+                     Text="C://"
+                     Padding="3"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"/>
+            <Button Grid.Column="1"
+                    Content="Browse.."
+                    Padding="3"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"/>
+        </Grid>
+
+        <StackPanel Grid.Row="3"
+                    MinHeight="150"/>
+
+        <Button Grid.Row="4"
+                Content="Change"
+                Padding="3"
+                Margin="15, 5, 15, 5"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"/>
     </Grid>
 </Window>
