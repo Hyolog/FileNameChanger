@@ -58,7 +58,9 @@
         </Grid>
 
         <StackPanel Grid.Row="3"
-                    MinHeight="150"/>
+                    MinHeight="150">
+            <ListView ItemsSource="{Binding PreviewFileList}"/>
+        </StackPanel>
 
         <Button Grid.Row="4"
                 Content="Change"
