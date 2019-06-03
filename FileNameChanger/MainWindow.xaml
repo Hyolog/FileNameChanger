@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:FileNameChanger.ViewModels"
         mc:Ignorable="d"
         Title="FileNameChanger" 
         MinWidth="400"
         SizeToContent="WidthAndHeight">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -41,7 +45,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBox Grid.Column="0"
-                     Text="C://"
+                     Text="{Binding DirectoryPath}"
                      Padding="3"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Center"/>
@@ -49,7 +53,8 @@
                     Content="Browse.."
                     Padding="3"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center"
+                    Click="BrowseButton_Click"/>
         </Grid>
 
         <StackPanel Grid.Row="3"
