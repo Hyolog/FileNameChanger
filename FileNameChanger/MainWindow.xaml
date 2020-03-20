@@ -18,6 +18,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0" 
@@ -57,16 +58,22 @@
                     Click="BrowseButton_Click"/>
         </Grid>
 
-        <StackPanel Grid.Row="3"
+        <StackPanel Grid.Row="3" Orientation="Horizontal"  >
+            <TextBox x:Name="Before" MinWidth="100"/>
+            <TextBox x:Name="After" MinWidth="100"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="4"
                     MinHeight="150">
             <ListView ItemsSource="{Binding PreviewFileList}"/>
         </StackPanel>
 
-        <Button Grid.Row="4"
+        <Button Grid.Row="5"
                 Content="Change"
                 Padding="3"
                 Margin="15, 5, 15, 5"
                 VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"/>
+                HorizontalAlignment="Right"
+                Click="Button_Click"/>
     </Grid>
 </Window>
