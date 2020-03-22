@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using FileNameChanger.ViewModels;
 
 namespace FileNameChanger
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -37,34 +34,53 @@ namespace FileNameChanger
 
         private void ChangeButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!GetValidationOfCheckBox())
+            {
+                return;
+            }
+
             var viewModel = DataContext as MainWindowViewModel;
 
             foreach (var fileName in viewModel.FileNames)
             {
-                if (fileName.Contains(FromTextBox.Text))
+                var newFileName = GetNewFileName(fileName);
+
+                if (!fileName.Equals(newFileName))
                 {
-                    var oldFileName = fileName;
-                    var newFileName = fileName.Replace(FromTextBox.Text, ToTextBox.Text);
-                    
-                    File.Move(oldFileName, newFileName);
+                    File.Move(fileName, newFileName);
                 }
             }
         }
 
         private void PreviewButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!GetValidationOfCheckBox())
+            {
+                return;
+            }
+
             var viewModel = DataContext as MainWindowViewModel;
 
             foreach (var fileName in viewModel.FileNames)
             {
-                if (fileName.Contains(FromTextBox.Text))
-                {
-                    // 파일 전체 돌면서 조건에 맞는 파일이 있는경우
-                    
-                    // (만약 new list 가 비어있다면) 만들고 바인딩
-                    viewModel.NewFileNames.Add(fileName.Replace(FromTextBox.Text, ToTextBox.Text));
-                }
+                viewModel.NewFileNames.Add(GetNewFileName(fileName));
             }
+        }
+
+        private string GetNewFileName(string oldFileName)
+        {
+            return oldFileName.Contains(FromTextBox.Text) ? oldFileName.Replace(FromTextBox.Text, ToTextBox.Text) : oldFileName;
+        }
+
+        private bool ContainProhibitedCharacters(string input)
+        {
+            return input.Any(d => Constants.ProhibitedCharacters.Contains(d));
+        }
+
+        // TODO : Renaming, 가독성 vs 라인 수
+        private bool GetValidationOfCheckBox()
+        {
+            return !(string.IsNullOrEmpty(FromTextBox.Text) || string.IsNullOrEmpty(ToTextBox.Text) || ContainProhibitedCharacters(FromTextBox.Text) || ContainProhibitedCharacters(ToTextBox.Text));
         }
     }
 }
