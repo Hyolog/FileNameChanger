@@ -2,6 +2,6 @@
 {
     public static class Constants
     {
-        public static char[] ProhibitedCharacters = new char[] { };
+        public static char[] ProhibitedCharacters = new char[] { '\\', '/', ':', '*', '?', '"', '<', '>', '|' };
     }
 }
