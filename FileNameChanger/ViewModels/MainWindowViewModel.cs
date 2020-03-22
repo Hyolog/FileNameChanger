@@ -18,14 +18,25 @@ namespace FileNameChanger.ViewModels
             }
         }
 
-        private List<PreviewFileFormat> previewFileList = new List<PreviewFileFormat>();
-        public List<PreviewFileFormat> PreviewFileList
+        private List<string> fileNames = new List<string>();
+        public List<string> FileNames
         {
-            get { return previewFileList; }
+            get { return fileNames; }
             set
             {
-                previewFileList = value;
-                OnPropertyChanged("PreviewFileList");
+                fileNames = value;
+                OnPropertyChanged("FileNames");
+            }
+        }
+
+        private List<string> newFileNames = new List<string>();
+        public List<string> NewFileNames
+        {
+            get { return newFileNames; }
+            set
+            {
+                newFileNames = value;
+                OnPropertyChanged("NewFileNames");
             }
         }
 
@@ -37,11 +48,5 @@ namespace FileNameChanger.ViewModels
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
-    }
-
-    public class PreviewFileFormat
-    {
-        public string OriginalFileName { get; set; }
-        public string ChangedFileName { get; set; }
     }
 }

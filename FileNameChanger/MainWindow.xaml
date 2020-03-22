@@ -6,8 +6,9 @@
         xmlns:vm="clr-namespace:FileNameChanger.ViewModels"
         mc:Ignorable="d"
         Title="FileNameChanger" 
+        SizeToContent="WidthAndHeight"
         MinWidth="400"
-        SizeToContent="WidthAndHeight">
+        MinHeight="300">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -17,63 +18,95 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" 
-              Padding="5">
-            <MenuItem Header="Mode">
-                <MenuItem Header="CutBefore"/>
-                <MenuItem Header="CutAfter"/>
-                <Separator/>
-            </MenuItem>
-            <MenuItem Header="Help" />
-        </Menu>
+        <Grid Grid.Row="0" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" 
-                   Text="Directory Path"
-                   Margin="5, 10, 5, 0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Bottom"/>
-        
-        <Grid Grid.Row="2"
-              Margin="15, 5, 15, 5"
-              VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Text="Select folder"/>
 
-            <TextBox Grid.Column="0"
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0"
                      Text="{Binding DirectoryPath}"
                      Padding="3"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Center"/>
-            <Button Grid.Column="1"
+                <Button Grid.Column="1"
                     Content="Browse.."
                     Padding="3"
-                    HorizontalAlignment="Right"
+                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Click="BrowseButton_Click"/>
+            </Grid>
         </Grid>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal"  >
-            <TextBox x:Name="Before" MinWidth="100"/>
-            <TextBox x:Name="After" MinWidth="100"/>
-        </StackPanel>
-        
-        <StackPanel Grid.Row="4"
-                    MinHeight="150">
-            <ListView ItemsSource="{Binding PreviewFileList}"/>
-        </StackPanel>
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Button Grid.Row="5"
-                Content="Change"
-                Padding="3"
-                Margin="15, 5, 15, 5"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                Click="Button_Click"/>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="From"/>
+                <TextBlock Grid.Column="1" Text="To"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="FromTextBox" Grid.Column="0" Padding="3" MinWidth="100"/>
+                <TextBox x:Name="ToTextBox" Grid.Column="1" Margin="5, 0, 0, 0" Padding="3" MinWidth="100"/>
+                <Button Content="Show preview" 
+                        Grid.Column="2" 
+                        Padding="3" MinWidth="100" 
+                        HorizontalAlignment="Right" 
+                        Click="PreviewButton_Click"/>
+            </Grid>
+        </Grid>
+
+        <Button Content="Change" 
+                Grid.Row="2" 
+                Margin="10" 
+                Padding="3" 
+                MinWidth="80" 
+                HorizontalAlignment="Right" 
+                Click="ChangeButton_Click"/>
+
+        <Grid Grid.Row="3" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Result"/>
+
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListView Grid.Column="0" ItemsSource="{Binding FileNames}"/>
+                <ListView Grid.Column="1" ItemsSource="{Binding FileNames}"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
