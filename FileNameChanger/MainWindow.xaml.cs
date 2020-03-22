@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using FileNameChanger.ViewModels;
@@ -26,32 +27,42 @@ namespace FileNameChanger
                     var viewModel = DataContext as MainWindowViewModel;
                     viewModel.DirectoryPath = fbd.SelectedPath;
 
-                    var fileList = Directory.GetFiles(fbd.SelectedPath);
-
-                    foreach(var file in fileList)
+                    foreach (var fileName in Directory.GetFiles(fbd.SelectedPath))
                     {
-                        viewModel.PreviewFileList.Add(new PreviewFileFormat() { OriginalFileName = file, ChangedFileName = file + "ex"});
+                        viewModel.FileNames.Add(fileName);
                     }
                 }
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ChangeButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = DataContext as MainWindowViewModel;
 
-            foreach (var file in viewModel.PreviewFileList)
+            foreach (var fileName in viewModel.FileNames)
             {
-
-                //1. file명에 Before가 포함되어있으면
-                //2. 해당 파일명의 그 부분을 after로 변경
-
-                if (file.OriginalFileName.Contains(Before.Text))
+                if (fileName.Contains(FromTextBox.Text))
                 {
-                    var oldFileName = file.OriginalFileName;
-                    var newFileName = file.OriginalFileName.Replace(Before.Text, After.Text);
-                    // 실제로 파일 명 변경
+                    var oldFileName = fileName;
+                    var newFileName = fileName.Replace(FromTextBox.Text, ToTextBox.Text);
+                    
                     File.Move(oldFileName, newFileName);
+                }
+            }
+        }
+
+        private void PreviewButton_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as MainWindowViewModel;
+
+            foreach (var fileName in viewModel.FileNames)
+            {
+                if (fileName.Contains(FromTextBox.Text))
+                {
+                    // 파일 전체 돌면서 조건에 맞는 파일이 있는경우
+                    
+                    // (만약 new list 가 비어있다면) 만들고 바인딩
+                    viewModel.NewFileNames.Add(fileName.Replace(FromTextBox.Text, ToTextBox.Text));
                 }
             }
         }
