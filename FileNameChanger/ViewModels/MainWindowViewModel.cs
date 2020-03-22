@@ -7,14 +7,14 @@ namespace FileNameChanger.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string directoryPath;
-        public string DirectoryPath
+        private string folderPath;
+        public string FolderPath
         {
-            get { return directoryPath; }
+            get { return folderPath; }
             set
             {
-                directoryPath = value;
-                OnPropertyChanged("DirectoryPath");
+                folderPath = value;
+                OnPropertyChanged("FolderPath");
             }
         }
 
