@@ -32,13 +32,7 @@ namespace FileNameChanger
 
         private void ChangeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(FolderPathTextBox.Text))
-            {
-                System.Windows.MessageBox.Show("Please check folder path.");
-                return;
-            }
-
-            if (!GetValidationOfCheckBox())
+            if (!GetValidationOfTextBox())
             {
                 return;
             }
@@ -54,17 +48,13 @@ namespace FileNameChanger
                     File.Move(fileName, newFileName);
                 }
             }
+
+            System.Windows.MessageBox.Show("Finished");
         }
 
         private void PreviewButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(FolderPathTextBox.Text))
-            {
-                System.Windows.MessageBox.Show("Please check folder path.");
-                return;
-            }
-
-            if (!GetValidationOfCheckBox())
+            if (!GetValidationOfTextBox())
             {
                 return;
             }
@@ -99,11 +89,26 @@ namespace FileNameChanger
         }
 
         // TODO : how can i know some method contain messagebox or not?
-        private bool GetValidationOfCheckBox()
+        private bool GetValidationOfTextBox()
         {
-            if (string.IsNullOrWhiteSpace(FromTextBox.Text) || string.IsNullOrWhiteSpace(ToTextBox.Text))
+            if (string.IsNullOrWhiteSpace(FolderPathTextBox.Text))
             {
-                System.Windows.MessageBox.Show("Please check textbox.");
+                System.Windows.MessageBox.Show("Please enter folder path.");
+                FolderPathTextBox.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(FromTextBox.Text))
+            {
+                System.Windows.MessageBox.Show("Please enter from text.");
+                FromTextBox.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(ToTextBox.Text))
+            {
+                System.Windows.MessageBox.Show("Please enter to text.");
+                ToTextBox.Focus();
                 return false;
             }
 

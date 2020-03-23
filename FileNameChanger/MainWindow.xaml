@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="FileNameChanger" 
         SizeToContent="WidthAndHeight"
-        MinWidth="400"
-        MinHeight="300">
+        MinWidth="500"
+        MinHeight="450" >
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -21,7 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="5">
@@ -40,7 +40,7 @@
 
                 <TextBox x:Name="FolderPathTextBox"
                      Grid.Column="0"
-                     Text="{Binding FolderPath}"
+                     Text="{Binding FolderPath, Mode=TwoWay}"
                      Padding="3"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Center"/>
@@ -87,7 +87,7 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="2" Margin="5">
+        <Grid Grid.Row="2" Margin="5" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -110,14 +110,14 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <ListView Grid.Column="0" ItemsSource="{Binding FileNames}" Height="150">
+                <ListView Grid.Column="0" ItemsSource="{Binding FileNames}" VerticalAlignment="Stretch">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=., Converter={StaticResource  FileNameConverter}}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <ListView Grid.Column="1" ItemsSource="{Binding NewFileNames}" Height="150">
+                <ListView Grid.Column="1" ItemsSource="{Binding NewFileNames}" VerticalAlignment="Stretch">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=., Converter={StaticResource  FileNameConverter}}"/>
