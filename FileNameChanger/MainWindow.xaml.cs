@@ -80,7 +80,7 @@ namespace FileNameChanger
 
         private string GetNewFileName(string oldFileName)
         {
-            return oldFileName.Contains(FromTextBox.Text) ? oldFileName.Replace(FromTextBox.Text, ToTextBox.Text) : oldFileName;
+            return oldFileName.Contains(ReplaceTextBox.Text) ? oldFileName.Replace(ReplaceTextBox.Text, ToTextBox.Text) : oldFileName;
         }
 
         private bool ContainProhibitedCharacters(string input)
@@ -98,10 +98,10 @@ namespace FileNameChanger
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(FromTextBox.Text))
+            if (string.IsNullOrWhiteSpace(ReplaceTextBox.Text))
             {
-                System.Windows.MessageBox.Show("Please enter from text.");
-                FromTextBox.Focus();
+                System.Windows.MessageBox.Show("Please enter replace text.");
+                ReplaceTextBox.Focus();
                 return false;
             }
 
@@ -112,7 +112,7 @@ namespace FileNameChanger
                 return false;
             }
 
-            if (ContainProhibitedCharacters(FromTextBox.Text) || ContainProhibitedCharacters(ToTextBox.Text))
+            if (ContainProhibitedCharacters(ReplaceTextBox.Text) || ContainProhibitedCharacters(ToTextBox.Text))
             {
                 System.Windows.MessageBox.Show($"Can not use these characters for fileName. {string.Join(" ",Constants.ProhibitedCharacters)}");
                 return false;
