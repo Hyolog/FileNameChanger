@@ -5,10 +5,10 @@ Tool to change file names at once according to certain rules
 * [WPF](https://docs.microsoft.com/en-US/dotnet/framework/wpf/getting-started/)
 
 ## Getting Started
-Coming soon through the microsoft market or private blog
+[download from shared google drive](https://drive.google.com/file/d/1rsBpK63TmtcfGS7xMs5ocohHCHTWTyrx/view) 
 
 ## How to use
-Coming soon through private blog
+https://dh-0501.tistory.com/139
 
 ## Authors
 DaeHyeonKang
