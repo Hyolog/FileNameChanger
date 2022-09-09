@@ -83,7 +83,8 @@ namespace FileNameChanger
             return oldFileName.Contains(ReplaceTextBox.Text) ? oldFileName.Replace(ReplaceTextBox.Text, ToTextBox.Text) : oldFileName;
         }
 
-        private bool ContainProhibitedCharacters(string input)
+        //Todo : 공용 클래스로 빼기
+        public bool ContainProhibitedCharacters(string input)
         {
             return input.Any(d => Constants.ProhibitedCharacters.Contains(d));
         }
