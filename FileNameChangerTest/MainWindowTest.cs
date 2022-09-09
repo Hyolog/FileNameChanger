@@ -11,6 +11,7 @@ namespace FileNameChangerTest
         public void ConstantsTest()
         {
             Assert.IsTrue(Constants.ProhibitedCharacters.Contains('/'));
+            Assert.IsTrue(Constants.ProhibitedCharacters.Contains('<'));
         }
     }
 }
